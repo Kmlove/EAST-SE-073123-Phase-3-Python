@@ -1,5 +1,5 @@
 class Appointment:
-   
+    all_appts = []
     #✅ 4. create relationship: appointment belongs to a pet
     #✅ 4a. use chatGPT to create instances
 
@@ -7,6 +7,10 @@ class Appointment:
         self.staff = staff 
         self.pet = pet 
         self.procedure = procedure
+        Appointment.all_appts.append(self)
+
+    def __repr__(self):
+        return f"<Appointment for {self.procedure} for {self.pet.name}>"
 
     #✅ 7. Create a function that prints details for the appointment 
         
