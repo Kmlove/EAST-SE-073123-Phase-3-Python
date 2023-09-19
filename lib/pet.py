@@ -16,9 +16,24 @@ class Pet:
     def __repr__(self):
         return f"<Pet {self.name} the {self.breed} belongs to {self.owner.name}>"
     
+     #✅ 5. create relationship: pet has many appointments
     def appointments(self):
         return [appointment for appointment in Appointment.all_appts if appointment.pet == self]
 
-    #✅ 5. create relationship: pet has many appointments
-
     #✅ 6. create relationship: pet has many procedures (but make it unique)
+    def procedures(self):
+        all_procedures = [appointment.procedure for appointment in self.appointments()]
+        return list(set(all_procedures))
+    
+    def print_pet_details(self):
+        print( f'''
+            name: {self.name}
+            age: {self.age}
+            breed: {self.breed}
+            ''')
+        
+    #✅ 10. add all bills for current pet
+    # All the appointments -> procedures for this pet
+    def bills(self):
+        all_procedures = [appt.procedure.price for appt in self.appointments()]
+        return f"{self.owner.name} owes ${sum(all_procedures)} for {self.name}"
